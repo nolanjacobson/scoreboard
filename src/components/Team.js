@@ -14,12 +14,19 @@ const Team = props => {
     }
   }
 
+  useEffect(() => {
+    if (!props.winner) {
+      setScore(0)
+    }
+  }, [props.winner])
+
   const getPokemon = async () => {
     try {
       const response = await Axios.get(
         `https://pokeapi.co/api/v2/pokemon/${teamName.toLowerCase()}`
       )
-      console.log(response)
+      setPokemon(response.data)
+      console.log(response.data)
     } catch (error) {
       alert('Please try with a valid Pokemon name')
     }
@@ -28,34 +35,42 @@ const Team = props => {
   useEffect(() => {
     getPokemon()
   }, [])
+
+  useEffect(() => {
+    if (score === 10) {
+      props.setWinner(true)
+      props.setWinningTeam(teamName)
+    }
+  }, [score])
   return (
     <>
-      {score === 10 && (
-        <>
-          <div>{teamName} WINS!</div>
-          <button onClick={() => setScore(0)}>Restart Game</button>
-        </>
-      )}
       <section>
         <div>{teamName}</div>
         <p>Update Team Name: {teamName}</p>
-        <input type="text" onChange={e => setTeamName(e.target.value)}></input>
+        <input
+          placeholder="Update Api Call"
+          type="text"
+          onChange={e => setTeamName(e.target.value)}
+        ></input>
+        <Button color="warning" onClick={getPokemon}>
+          Submit
+        </Button>
         <p>{score}</p>
         {/* <button onClick={() => setScore(score + 1)}>Add Point</button> */}
         <Button
-          outline
           color="primary"
-          disabled={score === 10}
+          disabled={props.winner}
           onClick={() => updateScore('add')}
         >
           Add Point
         </Button>
-        <button
-          disabled={score <= 0 || score === 10}
+        <Button
+          color="danger"
+          disabled={score <= 0 || props.winner}
           onClick={() => updateScore('subtract')}
         >
           Subtract Point
-        </button>
+        </Button>
       </section>
     </>
   )

@@ -16,3 +16,16 @@ body {
   background-color: yellow;
   padding: 2rem;
 }
+
+.flex-teams {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding-top: 5rem;
+}
+
+.winning-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
