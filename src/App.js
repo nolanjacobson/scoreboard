@@ -4,8 +4,10 @@ import Team from './components/Team'
 const App = () => {
   return (
     <>
-      <Team teamName={'Chicago Bulls'} />
-      <Team teamName={'Milwaukee Bucks'} />
+      <h1 className="scoreboard-header">Pokemon Scoreboard</h1>
+
+      <Team teamName={'Butterfree'} />
+      <Team teamName={'Pikachu'} />
     </>
   )
 }
