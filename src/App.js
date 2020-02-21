@@ -1,8 +1,13 @@
-import React, { Component } from 'react'
-import HelloWorld from './components/HelloWorld'
+import React, { Component, useState, useEffect } from 'react'
+import Team from './components/Team'
 
 const App = () => {
-  return <HelloWorld />
+  return (
+    <>
+      <Team teamName={'Chicago Bulls'} />
+      <Team teamName={'Milwaukee Bucks'} />
+    </>
+  )
 }
 
 export default App
