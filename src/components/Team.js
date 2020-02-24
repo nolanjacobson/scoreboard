@@ -5,7 +5,7 @@ const Team = props => {
   const [teamName, setTeamName] = useState(props.teamName)
   const [score, setScore] = useState(0)
   const [pokemon, setPokemon] = useState({})
-
+  const [image, setImage] = useState('')
   const updateScore = action => {
     if (action === 'add') {
       setScore(score + 1)
@@ -27,6 +27,7 @@ const Team = props => {
       )
       setPokemon(response.data)
       console.log(response.data)
+      setImage(response.data.sprites.back_default)
     } catch (error) {
       alert('Please try with a valid Pokemon name')
     }
@@ -46,6 +47,7 @@ const Team = props => {
     <>
       <section>
         <div>{teamName}</div>
+        <img src={image} />
         <p>Update Team Name: {teamName}</p>
         <input
           placeholder="Update Api Call"
